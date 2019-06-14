@@ -6,9 +6,20 @@
     </head>
 
     <body>
-
         <p>Very secret, highly secure, perfectly private chat app. Chat exclusively with yourself at the speed of thought</p>
 
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            socket.on('connect', (socket) => {
+                console.log("Connected to server")
+            });
+
+            socket.on('disconnect', (socket) => {
+                console.log('Disconnected from server');
+            })
+        </script>
     </body>
 
     </html>
