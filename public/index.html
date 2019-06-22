@@ -3,23 +3,28 @@
 
     <head>
         <meta charset="utf8">
+        <link href='css/style.css' rel="stylesheet">
     </head>
 
     <body>
-        <p>Very secret, highly secure, perfectly private chat app. Chat exclusively with yourself at the speed of thought</p>
+        <p> WebSocket Party !</p>
+        <!-- <button id='increment'>+1</button> -->
+
+        <div class='inputFormContainer' id='inputFormDiv'>
+            <form id="message-form" novalidate>
+                <div class="inputCtrlBox">
+                    <span>
+                        <input  name="message" id="inputMsg" class="inputMsg" type="text" placeholder="...write here..">
+                    </span>
+                    <span>
+                        <input class="sendMsg" type="submit" id="sendBtn" value="Send" name="sendBtn">
+                    </span>
+                </div>
+            </form>
+        </div>
 
         <script src="/socket.io/socket.io.js"></script>
-        <script>
-            var socket = io();
-
-            socket.on('connect', (socket) => {
-                console.log("Connected to server")
-            });
-
-            socket.on('disconnect', (socket) => {
-                console.log('Disconnected from server');
-            })
-        </script>
+        <script src="/js/chat.js"></script>
     </body>
 
     </html>

@@ -1,0 +1,39 @@
+.chatmsg-heading {
+    color: #070707;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.inputFormContainer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 20;
+    width: 90%;
+    height: 100px;
+    border-radius: 15px;
+}
+
+.inputMsg {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 40px;
+    width: 80%;
+    border-radius: 15px;
+    pading: 10px;
+    color: darkgray;
+}
+
+.sendMsg {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 40px;
+    width: 18%;
+    border-radius: 15px;
+}
+
+.inputCtrlBox {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 2px;
+    border-style: groove;
+    padding: 10px 10px 10px 10px;
+    border-radius: 15px;
+    color: darkgray;
+}
