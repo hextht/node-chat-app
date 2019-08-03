@@ -4,10 +4,15 @@
     <head>
         <meta charset="utf8">
         <link href='css/style.css' rel="stylesheet">
+        <link href='css/toasts.css' rel="stylesheet">
     </head>
 
     <body>
         <p> WebSocket Party !</p>
+        <div id="snackbar">Some text some message..</div>
+        <div class="msgBox" id="msgBox">
+
+        </div>
         <!-- <button id='increment'>+1</button> -->
 
         <div class='inputFormContainer' id='inputFormDiv'>
@@ -18,6 +23,9 @@
                     </span>
                     <span>
                         <input class="sendMsg" type="submit" id="sendBtn" value="Send" name="sendBtn">
+                    </span>
+                    <span>
+                        <button class="sendLoc" id="sendLoc" value="Send Location" name="sendLoc">Send Location</button>
                     </span>
                 </div>
             </form>

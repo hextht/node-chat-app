@@ -15,18 +15,40 @@
 
 .inputMsg {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    height: 40px;
-    width: 80%;
+    height: 60px;
+    font-size: 1.5vw;
+    width: 70%;
     border-radius: 15px;
-    pading: 10px;
-    color: darkgray;
+    padding: 15px 12px 15px 12px;
+    color: indigo;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
 }
 
 .sendMsg {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 40px;
-    width: 18%;
+    width: 12%;
     border-radius: 15px;
+}
+
+.sendLoc {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 40px;
+    width: 12%;
+    border-radius: 15px;
+    background-color: darkslategrey;
+    color: white;
+    margin-right: 10px;
+}
+
+.sendMsg:active {
+    animation-name: spin;
+    animation-duration: 1s;
 }
 
 .inputCtrlBox {
@@ -35,5 +57,34 @@
     border-style: groove;
     padding: 10px 10px 10px 10px;
     border-radius: 15px;
-    color: darkgray;
+    color: brown;
+    font-size: 44px;
+}
+
+.msgBox {
+    height: 70%;
+    width: 90%;
+    color: blue;
+    background-color: cornsilk;
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    border: 2px;
+    font-size: 1.4vw;
+    overflow: auto;
+    scroll-behavior: auto;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@keyframes glow {}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

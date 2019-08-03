@@ -6,6 +6,7 @@ const hbs = require('hbs');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
+const Filter = require('bad-words');
 
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public');
@@ -22,14 +23,29 @@ io.on('connect', (socket) => {
 
     console.log(chalk.green('New WebSocket connection.'));
     socket.emit('welcome', 'Welcome to our websocket party !');
+    socket.broadcast.emit('newConnection', "A new user has joined the room");
 
     socket.on('disconnect', () => {
         console.log(chalk.yellow('Client disconnected.'));
+        socket.broadcast.emit('disconnection', "A  user has left the room");
     })
 
-    socket.on('sendMessage', (msg) => {
+    socket.on('sendMessage', (msg, callback) => {
+
+        let filter = new Filter();
+        if (filter.isProfane(msg)) {
+            return callback(null, "No need to be rude. you have been censored!");
+        }
+
         io.emit('distributeMessage', msg);
-        console.log("Send Message: ", msg)
+    });
+
+    socket.on('sendLocation', (location, callback) => {
+        console.log(location);
+        let msg = `Location: ${location.latitude}, ${location.longitude}`;
+        // io.emit('distributeMessage', msg);
+        io.emit('distributeMessage', `https://google.com/maps?q=${location.latitude},${location.longitude}`);
+        callback();
     })
 })
 
