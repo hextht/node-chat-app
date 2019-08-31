@@ -11,16 +11,17 @@
     width: 90%;
     height: 100px;
     border-radius: 15px;
+    margin: 0 auto;
 }
 
 .inputMsg {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 60px;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     width: 70%;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 15px 12px 15px 12px;
-    color: indigo;
+    color: #121212;
     -webkit-box-sizing: border-box;
     /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;
@@ -33,49 +34,57 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 40px;
     width: 12%;
-    border-radius: 15px;
+    border-radius: 7px;
 }
 
 .sendLoc {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 40px;
     width: 12%;
-    border-radius: 15px;
-    background-color: darkslategrey;
+    border-radius: 7px;
+    background-color: rgb(54, 59, 59);
     color: white;
     margin-right: 10px;
 }
 
 .sendMsg:active {
-    animation-name: spin;
-    animation-duration: 1s;
+    /* animation-name: spin;
+    animation-duration: 1s; */
 }
 
 .inputCtrlBox {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: 2px;
-    border-style: groove;
+    border-style: inset;
     padding: 10px 10px 10px 10px;
-    border-radius: 15px;
-    color: brown;
-    font-size: 44px;
+    border-radius: 5px;
+    color: midnightblue;
+    font-size: 24px;
+    margin: 0 auto;
 }
 
 .msgBox {
     height: 70%;
     width: 90%;
-    color: blue;
-    background-color: cornsilk;
+    color: #121212;
+    background-color: whitesmoke;
     margin: 5px 5px 5px 5px;
+    margin: 0 auto;
     padding: 10px 10px 10px 10px;
     border: 2px;
-    font-size: 1.4vw;
+    font-size: 1.2rem;
     overflow: auto;
     scroll-behavior: auto;
 }
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: silver;
+}
+
+.timestamp {
+    color: darkslategrey;
+    font-size: 1.1rem;
 }
 
 @keyframes glow {}

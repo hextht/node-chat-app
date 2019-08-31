@@ -1,0 +1,8 @@
+https://tailwindcss.com/course/setting-up-tailwind-and-postcss/
+
+install
+npm init -y
+npm install tailwindcss postcss-cli autoprefixer
+
+#Then, generate a tailwind.config.js file:
+npx tailwind init

@@ -1,5 +1,19 @@
 const socket = io();
 
+// Elements
+const $messageForm = document.querySelector('#message-form');
+const $messageFormBtn = document.querySelector('#sendBtn');
+const $messageFormInput = document.querySelector('#inputMsg');
+const $locationBtn = document.querySelector('#sendLoc');
+const $messageBox = document.querySelector('#msgBox');
+
+// Templates 1: Select the element in which you want to render the template
+const $msgBox = document.querySelector('#msgBox');
+
+// Templates 2: Select the template
+const messageTemplate = document.querySelector('#message-template').innerHTML;
+const locationTemplate = document.querySelector('#location-template').innerHTML;
+
 
 socket.on('connect', () => {
     console.log('Connected to server');
@@ -11,27 +25,31 @@ socket.on('welcome', (msg) => {
     welcomeHeading.className = 'chatmsg-heading'
     welcomeHeading.innerHTML = msg;
     welcomeHeading.setAttribute('id', 'chatHeader');
-    document.querySelector('#msgBox').appendChild(welcomeHeading);
-    document.querySelector('#msgBox').appendChild(document.createElement('hr'));
+    $messageBox.appendChild(welcomeHeading);
+    $messageBox.appendChild(document.createElement('hr'));
 
     console.log(msg);
 
 });
 
 socket.on('distributeMessage', (msg) => {
-    console.log(msg.substr(0, 4));
-    const chatMsg = document.createElement('h5');
-    // if (msg.substr(0, 4) === 'http') {
-    //     const chatMsg = document.createElement('a');
-    //     chatMsg.href = msg;
-    // } else {
-    //     const chatMsg = document.createElement('h5');
-    // }
-    chatMsg.innerHTML = msg;
-    chatMsg.setAttribute('id', 'chatMsg');
-    document.querySelector('#msgBox').appendChild(chatMsg);
-    document.querySelector('#msgBox').appendChild(document.createElement('hr'));
-    updateScroll()
+    const html = Mustache.render(messageTemplate, { msg });
+    $messageBox.insertAdjacentHTML('beforeend', html);
+
+    updateScroll();
+});
+
+socket.on('locationMessage', (msg) => {
+
+    console.log("LOGGING SUBSTRING 0,4 ",
+        msg.msg.substr(0, 4));
+
+    const html = Mustache.render(locationTemplate, {
+        msg
+    });
+    $messageBox.insertAdjacentHTML('beforeend', html);
+
+    updateScroll();
 });
 
 socket.on('newConnection', (msg) => {
@@ -39,8 +57,8 @@ socket.on('newConnection', (msg) => {
     chatMsg.innerHTML = msg;
     chatMsg.setAttribute('id', 'chatMsg');
     chatMsg.style.color = 'blue';
-    document.querySelector('#msgBox').appendChild(chatMsg);
-    document.querySelector('#msgBox').appendChild(document.createElement('hr'));
+    $messageBox.appendChild(chatMsg);
+    $messageBox.appendChild(document.createElement('hr'));
     updateScroll();
 });
 
@@ -49,23 +67,30 @@ socket.on('disconnection', (msg) => {
     chatMsg.innerHTML = msg;
     chatMsg.setAttribute('id', 'chatMsg');
     chatMsg.style.color = 'red';
-    document.querySelector('#msgBox').appendChild(chatMsg);
-    document.querySelector('#msgBox').appendChild(document.createElement('hr'));
+    $messageBox.appendChild(chatMsg);
+    $messageBox.appendChild(document.createElement('hr'));
     updateScroll();
 })
 
 
-document.querySelector('#message-form').addEventListener('submit', (e) => {
+$messageForm.addEventListener('submit', (e) => {
     e.preventDefault();
     // input = document.getElementById("inputMsg");
 
+    // Disable the form
+    $messageFormBtn.setAttribute('disabled', 'disabled');
     // We can access the form also through the event - it passes the target element (the form in our case)
     message = e.target.elements.message.value;
     // message = input.value;
     socket.emit('sendMessage', message, (err, msg) => {
+        // Enable the form
+        $messageFormBtn.removeAttribute('disabled');
+        $messageFormInput.value = '';
+        $messageFormInput.focus();
         if (err) {
             return console.log(err);
         }
+
         toast(msg || err);
     });
     e.target.elements.message.value = "";
@@ -83,7 +108,7 @@ document.querySelector('#sendLoc').addEventListener('click', (e) => {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         };
-        socket.emit('sendLocation', location, (error) => {
+        socket.emit('locationMessage', location, (error) => {
             if (error) {
                 return console.log(error);
             }
