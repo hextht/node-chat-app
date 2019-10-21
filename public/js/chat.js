@@ -6,6 +6,7 @@ const $messageFormBtn = document.querySelector('#sendBtn');
 const $messageFormInput = document.querySelector('#inputMsg');
 const $locationBtn = document.querySelector('#sendLoc');
 const $messageBox = document.querySelector('#msgBox');
+const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 
 // Templates 1: Select the element in which you want to render the template
 const $msgBox = document.querySelector('#msgBox');
@@ -14,6 +15,9 @@ const $msgBox = document.querySelector('#msgBox');
 const messageTemplate = document.querySelector('#message-template').innerHTML;
 const locationTemplate = document.querySelector('#location-template').innerHTML;
 
+// Options
+
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
 socket.on('connect', () => {
     console.log('Connected to server');
@@ -24,6 +28,8 @@ socket.on('welcome', (msg) => {
     const welcomeHeading = document.createElement('h4');
     welcomeHeading.className = 'chatmsg-heading'
     welcomeHeading.innerHTML = msg;
+    // welcomeHeading.style.marginLeft = '0.5rem';
+    welcomeHeading.className = "ml-2";
     welcomeHeading.setAttribute('id', 'chatHeader');
     $messageBox.appendChild(welcomeHeading);
     $messageBox.appendChild(document.createElement('hr'));
@@ -35,8 +41,14 @@ socket.on('welcome', (msg) => {
 socket.on('distributeMessage', (msg) => {
     const html = Mustache.render(messageTemplate, { msg });
     $messageBox.insertAdjacentHTML('beforeend', html);
-
+    console.log(msg);
     updateScroll();
+});
+
+socket.on('roomData', ({ room, users }) => {
+    console.log(`UPDATE USERLIST: ${room} - ${users}`, )
+    const html = Mustache.render(sidebarTemplate, { room, users });
+    document.querySelector('#sidebar').innerHTML = html;
 });
 
 socket.on('locationMessage', (msg) => {
@@ -154,3 +166,10 @@ function toast(msg) {
     // After 3 seconds, remove the show class from DIV
     setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
 }
+
+socket.emit("join", { username, room }, (error) => {
+    if (error) {
+        alert(error);
+        location.href = '/';
+    }
+});

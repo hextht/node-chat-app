@@ -7,7 +7,8 @@
         "start": "node src/index.js",
         "monitor": "nodemon src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "c:\\Users\\hextht\\node-exec.bat postcss src\\css\\tailwind.css -o public\\css\\tailwind.css"
+        "build": "c:\\Users\\hextht\\node-exec.bat postcss src\\css\\tailwind.css -o public\\css\\tailwind.css",
+        "watch": "c:\\Users\\hextht\\node-exec.bat postcss src\\css\\tailwind.css -o public\\css\\tailwind.css --watch"
     },
     "engines": {
         "node": "10.13.0"
@@ -15,6 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "autoprefixer": "^9.6.1",
         "bad-words": "^3.0.3",
         "chalk": "^2.4.2",
         "express": "^4.17.1",
@@ -22,9 +24,11 @@
         "helmet": "^3.18.0",
         "lodash": "^4.17.13",
         "moment": "^2.24.0",
-        "socket.io": "^2.2.0",
-        "autoprefixer": "^9.6.1",
+        "normalize.css": "^8.0.1",
+        "postcss": "^7.0.18",
         "postcss-cli": "^6.1.3",
+        "socket.io": "^2.2.0",
+        "tailwind-percentage-heights-plugin": "^0.1.4",
         "tailwindcss": "^1.1.2"
     }
 }
